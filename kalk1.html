@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prosty kalkulator</title>
+    <style>
+      /*styl dla elementów HTML o klasie .button*/
+      .button {
+        /*ustawiają szerokość i wysokość przycisku na 50 pikseli*/
+        width: 50px;
+        height: 50px;
+        /*ustawia rozmiar czcionki na 25 pikseli*/
+        font-size: 25px;
+        /* dodaje margines o szerokości 2 pikseli wokół przycisku*/
+        margin: 2px;
+        /*zmienia kursor na wskaźnik -ręka z wskazującym palcem- gdy użytkownik najedzie na przycisk*/
+        cursor: pointer;
+      }
+      /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
+      .textview {
+        /*ustawia szerokość elementu na 240 pikseli*/
+        width: 240px;
+        /*dodaje margines o szerokości 5 pikseli wokół elementu*/
+        margin: 5px;
+        /*ustawia rozmiar czcionki na 25 pikseli*/
+        font-size: 25px;
+        /*dodaje wewnętrzny margines, znanym jako padding, o szerokości 5 pikseli wokół zawartości elementu*/
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <input class="textview" id="result" />
+      <br />
+      <button class="button" onclick="insert('1')">1</button>
+      <button class="button" onclick="insert('2')">2</button>
+      <button class="button" onclick="insert('3')">3</button>
+      <button class="button" onclick="insert('+')">+</button>
+      <br />
+      <button class="button" onclick="insert('4')">4</button>
+      <button class="button" onclick="insert('5')">5</button>
+      <button class="button" onclick="insert('6')">6</button>
+      <button class="button" onclick="insert('-')">-</button>
+      <br />
+      <button class="button" onclick="insert('7')">7</button>
+      <button class="button" onclick="insert('8')">8</button>
+      <button class="button" onclick="insert('9')">9</button>
+      <button class="button" onclick="insert('*')">*</button>
+      <br />
+      <button class="button" onclick="insert('.')">.</button>
+      <button class="button" onclick="insert('0')">0</button>
+      <button class="button" onclick="equal('=')">=</button>
+      <button class="button" onclick="insert('/')">/</button>
+      <br />
+      <button class="button" onclick="clean()">C</button>
+    </div>
+    <script type="text/javascript">
+      //dodawanie cyfry lub operatora do wyświetlacz
+      function insert(num) {
+        document.getElementById("result").value =
+          document.getElementById("result").value + num;
+      }
+      //oblicza wynik wyrażenia matematycznego
+      function equal() {
+        var exp = document.getElementById("result").value;
+        if (exp) {
+          document.getElementById("result").value = eval(exp);
+        }
+      }
+      //czyści wyświetlacz
+      function clean() {
+        document.getElementById("result").value = "";
+      }
+    </script>
+  </body>
+</html>
