@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Prosty kalkulator</title>
+    <title>Simple Calculator</title>
     <style>
       /*styl dla elementów HTML o klasie .button*/
       .button {
@@ -29,29 +29,39 @@
     </style>
   </head>
   <body>
+    <!--Tworzy kontener div z identyfikatorem calculator. Można go użyć do
+    stylizacji lub manipulacji za pomocą CSS lub JavaScript-->
     <div id="calculator">
+      <!--Tworzy pole wejściowe o klasie textview i identyfikatorze result. 
+      To pole wejściowe może być używane do wyświetlania wyników obliczeń kalkulatora.-->
       <input class="textview" id="result" />
       <br />
+      <!--Te znaczniki HTML tworzą przyciski, które są używane w interfejsie kalkulatora.Wszystkie w jednym wierszu.
+      Funkcja insert dodaje wartość przekazaną jako argument do pola wejściowego kalkulatora.-->
       <button class="button" onclick="insert('1')">1</button>
       <button class="button" onclick="insert('2')">2</button>
       <button class="button" onclick="insert('3')">3</button>
       <button class="button" onclick="insert('+')">+</button>
       <br />
+      <!--Kolejny wiersz przycisków-->
       <button class="button" onclick="insert('4')">4</button>
       <button class="button" onclick="insert('5')">5</button>
       <button class="button" onclick="insert('6')">6</button>
       <button class="button" onclick="insert('-')">-</button>
       <br />
+      <!--Kolejny wiersz przycisków-->
       <button class="button" onclick="insert('7')">7</button>
       <button class="button" onclick="insert('8')">8</button>
       <button class="button" onclick="insert('9')">9</button>
       <button class="button" onclick="insert('*')">*</button>
       <br />
+      <!--Kolejny wiersz przycisków-->
       <button class="button" onclick="insert('.')">.</button>
       <button class="button" onclick="insert('0')">0</button>
       <button class="button" onclick="equal('=')">=</button>
       <button class="button" onclick="insert('/')">/</button>
       <br />
+      <!--Kolejny wiersz przycisków-->
       <button class="button" onclick="clean()">C</button>
     </div>
     <script type="text/javascript">
