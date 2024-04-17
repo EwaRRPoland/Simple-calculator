@@ -54,7 +54,7 @@
       /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
       .textview {
         /*ustawia szerokość elementu na 240 pikseli*/
-        width: 240px;
+        width: 206px;
         /*dodaje margines o szerokości 5 pikseli wokół elementu*/
         margin: 5px;
         /*ustawia rozmiar czcionki na 25 pikseli*/
@@ -115,26 +115,26 @@
         if (exp) {
           document.getElementById("result").value = eval(exp);
         }
-        //oblicza pierwiastek kwadratowy liczby
-        function squareRoot() {
-          var exp = document.getElementById("result").value;
-          if (exp) {
-            document.getElementById("result").value = Math.sqrt(eval(exp));
-          }
+      }
+      //oblicza pierwiastek kwadratowy liczby
+      function squareRoot() {
+        var exp = document.getElementById("result").value;
+        if (exp) {
+          document.getElementById("result").value = Math.sqrt(eval(exp));
         }
-        //podnosi liczbę do kwadratu
-        function square() {
-          var exp = document.getElementById("result").value;
-          if (exp) {
-            document.getElementById("result").value = Math.pow(eval(exp), 2);
-          }
+      }
+      //podnosi liczbę do kwadratu
+      function square() {
+        var exp = document.getElementById("result").value;
+        if (exp) {
+          document.getElementById("result").value = Math.pow(eval(exp), 2);
         }
-        //oblicza procent liczby
-        function percent() {
-          var exp = document.getElementById("result").value;
-          if (exp) {
-            document.getElementById("result").value = eval(exp) / 100;
-          }
+      }
+      //oblicza procent liczby
+      function percent() {
+        var exp = document.getElementById("result").value;
+        if (exp) {
+          document.getElementById("result").value = eval(exp) / 100;
         }
       }
       //czyści wyświetlacz
