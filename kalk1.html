@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
     <title>Simple Calculator</title>
+    <meta
+      name="description"
+      content="Prosty kalkulator matematyczny do szybkich obliczeń online. 
+      Dodawanie, odejmowanie, mnożenie i dzielenie."
+    />
     <style>
+      /*ten kod CSS sprawia, że kalkulator będzie wyśrodkowany zarówno w pionie, jak i w poziomie na stronie.
+      Marginesy domyślne dla elementu body muszą być ustawione na margin: 0*/
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+
+        /* zmienia kolor tła na niebieski, rezygnacja z pomysłu */
+        /* background-color: rgb(121, 121, 231);*/
+
+        /* ustawia tło jako gradient od niebieskiego do zielonego */
+        background: linear-gradient(
+          to right,
+          rgb(133, 133, 233),
+          rgb(231, 130, 36)
+        );
+      }
       /*styl dla elementów HTML o klasie .button*/
       .button {
         /*ustawiają szerokość i wysokość przycisku na 50 pikseli*/
@@ -14,7 +39,18 @@
         margin: 2px;
         /*zmienia kursor na wskaźnik -ręka z wskazującym palcem- gdy użytkownik najedzie na przycisk*/
         cursor: pointer;
+
+        /* zaokrągla rogi przycisków */
+        border-radius: 10px;
+
+        /* zmienia kolor tła przycisku na czerwony po najechaniu */
+        transition: background-color 0.3s ease;
       }
+
+      .button:hover {
+        background-color: orange;
+      }
+
       /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
       .textview {
         /*ustawia szerokość elementu na 240 pikseli*/
@@ -38,31 +74,34 @@
       <br />
       <!--Te znaczniki HTML tworzą przyciski, które są używane w interfejsie kalkulatora.Wszystkie w jednym wierszu.
       Funkcja insert dodaje wartość przekazaną jako argument do pola wejściowego kalkulatora.-->
-      <button class="button" onclick="insert('1')">1</button>
-      <button class="button" onclick="insert('2')">2</button>
-      <button class="button" onclick="insert('3')">3</button>
-      <button class="button" onclick="insert('+')">+</button>
-      <br />
-      <!--Kolejny wiersz przycisków-->
-      <button class="button" onclick="insert('4')">4</button>
-      <button class="button" onclick="insert('5')">5</button>
-      <button class="button" onclick="insert('6')">6</button>
-      <button class="button" onclick="insert('-')">-</button>
+      <button class="button" onclick="clean()">C</button>
+      <button class="button" onclick="square()">x²</button>
+      <button class="button" onclick="squareRoot()">√</button>
+      <button class="button" onclick="percent()">%</button>
       <br />
       <!--Kolejny wiersz przycisków-->
       <button class="button" onclick="insert('7')">7</button>
       <button class="button" onclick="insert('8')">8</button>
       <button class="button" onclick="insert('9')">9</button>
-      <button class="button" onclick="insert('*')">*</button>
-      <br />
-      <!--Kolejny wiersz przycisków-->
-      <button class="button" onclick="insert('.')">.</button>
-      <button class="button" onclick="insert('0')">0</button>
-      <button class="button" onclick="equal('=')">=</button>
       <button class="button" onclick="insert('/')">/</button>
       <br />
       <!--Kolejny wiersz przycisków-->
-      <button class="button" onclick="clean()">C</button>
+      <button class="button" onclick="insert('4')">4</button>
+      <button class="button" onclick="insert('5')">5</button>
+      <button class="button" onclick="insert('6')">6</button>
+      <button class="button" onclick="insert('*')">*</button>
+      <br />
+      <!--Kolejny wiersz przycisków-->
+      <button class="button" onclick="insert('1')">1</button>
+      <button class="button" onclick="insert('2')">2</button>
+      <button class="button" onclick="insert('3')">3</button>
+      <button class="button" onclick="insert('-')">-</button>
+      <br />
+      <!--Kolejny wiersz przycisków-->
+      <button class="button" onclick="insert('0')">0</button>
+      <button class="button" onclick="insert('.')">.</button>
+      <button class="button" onclick="equal('=')">=</button>
+      <button class="button" onclick="insert('+')">+</button>
     </div>
     <script type="text/javascript">
       //dodawanie cyfry lub operatora do wyświetlacz
@@ -75,6 +114,27 @@
         var exp = document.getElementById("result").value;
         if (exp) {
           document.getElementById("result").value = eval(exp);
+        }
+        //oblicza pierwiastek kwadratowy liczby
+        function squareRoot() {
+          var exp = document.getElementById("result").value;
+          if (exp) {
+            document.getElementById("result").value = Math.sqrt(eval(exp));
+          }
+        }
+        //podnosi liczbę do kwadratu
+        function square() {
+          var exp = document.getElementById("result").value;
+          if (exp) {
+            document.getElementById("result").value = Math.pow(eval(exp), 2);
+          }
+        }
+        //oblicza procent liczby
+        function percent() {
+          var exp = document.getElementById("result").value;
+          if (exp) {
+            document.getElementById("result").value = eval(exp) / 100;
+          }
         }
       }
       //czyści wyświetlacz
