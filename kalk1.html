@@ -17,10 +17,6 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-
-        /* zmienia kolor tła na niebieski, rezygnacja z pomysłu */
-        /* background-color: rgb(121, 121, 231);*/
-
         /* ustawia tło jako gradient od niebieskiego do zielonego */
         background: linear-gradient(
           to right,
@@ -39,18 +35,14 @@
         margin: 2px;
         /*zmienia kursor na wskaźnik -ręka z wskazującym palcem- gdy użytkownik najedzie na przycisk*/
         cursor: pointer;
-
         /* zaokrągla rogi przycisków */
         border-radius: 10px;
-
         /* zmienia kolor tła przycisku na czerwony po najechaniu */
         transition: background-color 0.3s ease;
       }
-
       .button:hover {
         background-color: orange;
       }
-
       /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
       .textview {
         /*ustawia szerokość elementu na 206 pikseli*/
@@ -104,64 +96,6 @@
       <button class="button" onclick="insert('+')">+</button>
     </div>
     <script type="text/javascript">
-      //dodawanie cyfry lub operatora do wyświetlacz
-      // function insert(num) {
-      //   document.getElementById("result").value =
-      //     document.getElementById("result").value + num;
-      // }
-
-      // function insert(num) {
-      //   var currentExpression = document.getElementById("result").value;
-      //   if (num == "." && currentExpression.includes(".")) {
-      //     return; // Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
-      //   }
-      //   document.getElementById("result").value = currentExpression + num;
-      // }
-
-      // function insert(num) {
-      //   var currentExpression = document.getElementById("result").value;
-      //   if (num == ".") {
-      //     // Sprawdź, czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym
-      //     var lastNumber = currentExpression.split(/[\+\-\*\/]/).pop();
-      //     if (lastNumber.includes(".")) {
-      //       return;
-      //// Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
-      //     }
-      //   }
-      //   document.getElementById("result").value = currentExpression + num;
-      // }
-
-      //oblicza wynik wyrażenia matematycznego
-      // function equal() {
-      //   var exp = document.getElementById("result").value;
-      //   if (exp) {
-      //     document.getElementById("result").value = eval(exp);
-      //   }
-      // }
-
-      // function equal() {
-      //   var exp = document.getElementById("result").value;
-      //   if (exp) {
-      //     var result = eval(exp);
-      //     // Zaokrągla wynik do 13 miejsc po przecinku
-      //     document.getElementById("result").value = result.toFixed(13);
-      //   }
-      // }
-
-      // function equal() {
-      //   var exp = document.getElementById("result").value;
-      //   if (exp) {
-      //     var result = eval(exp);
-      //     // Sprawdź, czy wynik jest liczbą całkowitą
-      //     if (Number.isInteger(result)) {
-      //       document.getElementById("result").value = result;
-      //     } else {
-      //       // Jeśli wynik jest ułamkiem, zaokrąglij do 13 miejsc po przecinku
-      //       document.getElementById("result").value = result.toFixed(13);
-      //     }
-      //   }
-      // }
-
       //W tym kodzie, zmienna justCalculated jest ustawiana na true po obliczeniu wyniku.
       //Następnie, w funkcji insert(), jeśli justCalculated jest true, ekran jest czyszczony
       //przed dodaniem nowego numeru. W ten sposób, jeśli użytkownik spróbuje dopisać do wyświetlonego wyniku,
@@ -184,7 +118,6 @@
         }
         document.getElementById("result").value = currentExpression + num;
       }
-
       //oblicza wynik wyrażenia matematycznego
       function equal() {
         var exp = document.getElementById("result").value;
@@ -200,11 +133,9 @@
           justCalculated = true;
         }
       }
-
       function clean() {
         document.getElementById("result").value = "";
       }
-
       //oblicza pierwiastek kwadratowy liczby
       function squareRoot() {
         var exp = document.getElementById("result").value;
