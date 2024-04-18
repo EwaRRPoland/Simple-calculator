@@ -53,7 +53,7 @@
 
       /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
       .textview {
-        /*ustawia szerokość elementu na 240 pikseli*/
+        /*ustawia szerokość elementu na 206 pikseli*/
         width: 206px;
         /*dodaje margines o szerokości 5 pikseli wokół elementu*/
         margin: 5px;
@@ -105,17 +105,106 @@
     </div>
     <script type="text/javascript">
       //dodawanie cyfry lub operatora do wyświetlacz
+      // function insert(num) {
+      //   document.getElementById("result").value =
+      //     document.getElementById("result").value + num;
+      // }
+
+      // function insert(num) {
+      //   var currentExpression = document.getElementById("result").value;
+      //   if (num == "." && currentExpression.includes(".")) {
+      //     return; // Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
+      //   }
+      //   document.getElementById("result").value = currentExpression + num;
+      // }
+
+      // function insert(num) {
+      //   var currentExpression = document.getElementById("result").value;
+      //   if (num == ".") {
+      //     // Sprawdź, czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym
+      //     var lastNumber = currentExpression.split(/[\+\-\*\/]/).pop();
+      //     if (lastNumber.includes(".")) {
+      //       return;
+      //// Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
+      //     }
+      //   }
+      //   document.getElementById("result").value = currentExpression + num;
+      // }
+
+      //oblicza wynik wyrażenia matematycznego
+      // function equal() {
+      //   var exp = document.getElementById("result").value;
+      //   if (exp) {
+      //     document.getElementById("result").value = eval(exp);
+      //   }
+      // }
+
+      // function equal() {
+      //   var exp = document.getElementById("result").value;
+      //   if (exp) {
+      //     var result = eval(exp);
+      //     // Zaokrągla wynik do 13 miejsc po przecinku
+      //     document.getElementById("result").value = result.toFixed(13);
+      //   }
+      // }
+
+      // function equal() {
+      //   var exp = document.getElementById("result").value;
+      //   if (exp) {
+      //     var result = eval(exp);
+      //     // Sprawdź, czy wynik jest liczbą całkowitą
+      //     if (Number.isInteger(result)) {
+      //       document.getElementById("result").value = result;
+      //     } else {
+      //       // Jeśli wynik jest ułamkiem, zaokrąglij do 13 miejsc po przecinku
+      //       document.getElementById("result").value = result.toFixed(13);
+      //     }
+      //   }
+      // }
+
+      //W tym kodzie, zmienna justCalculated jest ustawiana na true po obliczeniu wyniku.
+      //Następnie, w funkcji insert(), jeśli justCalculated jest true, ekran jest czyszczony
+      //przed dodaniem nowego numeru. W ten sposób, jeśli użytkownik spróbuje dopisać do wyświetlonego wyniku,
+      // ekran zostanie wyczyszczony, a nowy numer zostanie wyświetlony samodzielnie.
+      var justCalculated = false;
+      //dodawanie cyfry lub operatora do wyświetlacz
       function insert(num) {
-        document.getElementById("result").value =
-          document.getElementById("result").value + num;
+        if (justCalculated) {
+          clean();
+          justCalculated = false;
+        }
+        var currentExpression = document.getElementById("result").value;
+        if (num == ".") {
+          // Sprawdź, czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym
+          var lastNumber = currentExpression.split(/[\+\-\*\/]/).pop();
+          if (lastNumber.includes(".")) {
+            return;
+            // Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
+          }
+        }
+        document.getElementById("result").value = currentExpression + num;
       }
+
       //oblicza wynik wyrażenia matematycznego
       function equal() {
         var exp = document.getElementById("result").value;
         if (exp) {
-          document.getElementById("result").value = eval(exp);
+          var result = eval(exp);
+          // Sprawdź, czy wynik jest liczbą całkowitą
+          if (Number.isInteger(result)) {
+            document.getElementById("result").value = result;
+          } else {
+            // Jeśli wynik jest ułamkiem, zaokrąglij do 8 miejsca po przecinku
+            document.getElementById("result").value = result.toFixed(8);
+          }
+          justCalculated = true;
         }
       }
+
+      function clean() {
+        document.getElementById("result").value = "";
+      }
+
       //oblicza pierwiastek kwadratowy liczby
       function squareRoot() {
         var exp = document.getElementById("result").value;
