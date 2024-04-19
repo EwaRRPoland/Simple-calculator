@@ -96,12 +96,19 @@
       <button class="button" onclick="insert('+')">+</button>
     </div>
     <script type="text/javascript">
-      //W tym kodzie, zmienna justCalculated jest ustawiana na true po obliczeniu wyniku.
-      //Następnie, w funkcji insert(), jeśli justCalculated jest true, ekran jest czyszczony
-      //przed dodaniem nowego numeru. W ten sposób, jeśli użytkownik spróbuje dopisać do wyświetlonego wyniku,
-      // ekran zostanie wyczyszczony, a nowy numer zostanie wyświetlony samodzielnie.
+      //Sprawdza, czy zmienna justCalculated jest ustawiona na true, co oznacza,
+      //że właśnie obliczono wynik. Jeśli tak, to funkcja clean() jest wywoływana, aby wyczyścić ekran,
+      //a justCalculated jest ustawiane na false.
+      //Pobiera bieżące wyrażenie z ekranu kalkulatora.
+      //Jeśli dodawany numer to przecinek (czyli .), funkcja sprawdza,
+      //czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym. Jeśli tak,
+      //funkcja zwraca kontrolę i nie dodaje kolejnego przecinka.
+      //Dodaje numer do bieżącego wyrażenia na ekranie kalkulatora.
+      //W ten sposób, funkcja insert() pozwala na wprowadzanie liczb
+      //i operatorów do kalkulatora, jednocześnie zapewniając,
+      //że po obliczeniu wyniku, ekran jest czyszczony przed dodaniem nowego numeru.
+      //To zapobiega dopisywaniu do wyniku po jego obliczeniu.
       var justCalculated = false;
-      //dodawanie cyfry lub operatora do wyświetlacz
       function insert(num) {
         if (justCalculated) {
           clean();
@@ -133,6 +140,7 @@
           justCalculated = true;
         }
       }
+      //czyści wyświetlacz
       function clean() {
         document.getElementById("result").value = "";
       }
@@ -141,6 +149,7 @@
         var exp = document.getElementById("result").value;
         if (exp) {
           document.getElementById("result").value = Math.sqrt(eval(exp));
+          justCalculated = true;
         }
       }
       //podnosi liczbę do kwadratu
@@ -148,6 +157,7 @@
         var exp = document.getElementById("result").value;
         if (exp) {
           document.getElementById("result").value = Math.pow(eval(exp), 2);
+          justCalculated = true;
         }
       }
       //oblicza procent liczby
@@ -155,11 +165,8 @@
         var exp = document.getElementById("result").value;
         if (exp) {
           document.getElementById("result").value = eval(exp) / 100;
+          justCalculated = true;
         }
-      }
-      //czyści wyświetlacz
-      function clean() {
-        document.getElementById("result").value = "";
       }
     </script>
   </body>
