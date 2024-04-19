@@ -5,109 +5,109 @@
     <title>Simple Calculator</title>
     <meta
       name="description"
-      content="Prosty kalkulator matematyczny do szybkich obliczeń online. 
-      Dodawanie, odejmowanie, mnożenie i dzielenie."
+      content="A simple online mathematical calculator for quick calculations. 
+      Addition, subtraction, multiplication, and division. Square and square root, as well as percentage."
     />
     <style>
-      /*ten kod CSS sprawia, że kalkulator będzie wyśrodkowany zarówno w pionie, jak i w poziomie na stronie.
-      Marginesy domyślne dla elementu body muszą być ustawione na margin: 0*/
+      /* This CSS code makes the calculator centered both vertically and horizontally on the page.
+  The default margins for the body element must be set to margin: 0 */
       body {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         margin: 0;
-        /* ustawia tło jako gradient od niebieskiego do zielonego */
+        /* sets the background as a gradient from blue to green */
         background: linear-gradient(
           to right,
           rgb(133, 133, 233),
           rgb(231, 130, 36)
         );
       }
-      /*styl dla elementów HTML o klasie .button*/
+      /* style for HTML elements with the .button class */
       .button {
-        /*ustawiają szerokość i wysokość przycisku na 50 pikseli*/
+        /* sets the width and height of the button to 50 pixels */
         width: 50px;
         height: 50px;
-        /*ustawia rozmiar czcionki na 25 pikseli*/
+        /* sets the font size to 25 pixels */
         font-size: 25px;
-        /* dodaje margines o szerokości 2 pikseli wokół przycisku*/
+        /* adds a margin of 2 pixels around the button */
         margin: 2px;
-        /*zmienia kursor na wskaźnik -ręka z wskazującym palcem- gdy użytkownik najedzie na przycisk*/
+        /* changes the cursor to a pointer -hand with pointing finger- when the user hovers over the button */
         cursor: pointer;
-        /* zaokrągla rogi przycisków */
+        /* rounds the corners of the buttons */
         border-radius: 10px;
-        /* zmienia kolor tła przycisku na czerwony po najechaniu */
+        /* changes the background color of the button to red when hovered */
         transition: background-color 0.3s ease;
       }
       .button:hover {
         background-color: orange;
       }
-      /*Ten fragment kodu CSS definiuje styl dla elementów HTML o klasie .textview*/
+      /* This piece of CSS code defines the style for HTML elements with the .textview class */
       .textview {
-        /*ustawia szerokość elementu na 206 pikseli*/
+        /* sets the width of the element to 206 pixels */
         width: 206px;
-        /*dodaje margines o szerokości 5 pikseli wokół elementu*/
+        /* adds a margin of 5 pixels around the element */
         margin: 5px;
-        /*ustawia rozmiar czcionki na 25 pikseli*/
+        /* sets the font size to 25 pixels */
         font-size: 25px;
-        /*dodaje wewnętrzny margines, znanym jako padding, o szerokości 5 pikseli wokół zawartości elementu*/
+        /* adds an internal margin, known as padding, of 5 pixels around the content of the element */
         padding: 5px;
       }
     </style>
   </head>
   <body>
-    <!--Tworzy kontener div z identyfikatorem calculator. Można go użyć do
-    stylizacji lub manipulacji za pomocą CSS lub JavaScript-->
+    <!--Creates a div container with the identifier calculator. It can be used for
+    styling or manipulation with CSS or JavaScript-->
     <div id="calculator">
-      <!--Tworzy pole wejściowe o klasie textview i identyfikatorze result. 
-      To pole wejściowe może być używane do wyświetlania wyników obliczeń kalkulatora.-->
+      <!--Creates an input field with the class textview and the identifier result. 
+      This input field can be used to display the results of the calculator's calculations.-->
       <input class="textview" id="result" />
       <br />
-      <!--Te znaczniki HTML tworzą przyciski, które są używane w interfejsie kalkulatora.Wszystkie w jednym wierszu.
-      Funkcja insert dodaje wartość przekazaną jako argument do pola wejściowego kalkulatora.-->
+      <!--These HTML tags create buttons that are used in the calculator interface. All in one row.
+      The insert function adds the value passed as an argument to the calculator's input field.-->
       <button class="button" onclick="clean()">C</button>
       <button class="button" onclick="square()">x²</button>
       <button class="button" onclick="squareRoot()">√</button>
       <button class="button" onclick="percent()">%</button>
       <br />
-      <!--Kolejny wiersz przycisków-->
+      <!--Another row of buttons-->
       <button class="button" onclick="insert('7')">7</button>
       <button class="button" onclick="insert('8')">8</button>
       <button class="button" onclick="insert('9')">9</button>
       <button class="button" onclick="insert('/')">/</button>
       <br />
-      <!--Kolejny wiersz przycisków-->
+      <!--Another row of buttons-->
       <button class="button" onclick="insert('4')">4</button>
       <button class="button" onclick="insert('5')">5</button>
       <button class="button" onclick="insert('6')">6</button>
       <button class="button" onclick="insert('*')">*</button>
       <br />
-      <!--Kolejny wiersz przycisków-->
+      <!--Another row of buttons-->
       <button class="button" onclick="insert('1')">1</button>
       <button class="button" onclick="insert('2')">2</button>
       <button class="button" onclick="insert('3')">3</button>
       <button class="button" onclick="insert('-')">-</button>
       <br />
-      <!--Kolejny wiersz przycisków-->
+      <!--Another row of buttons-->
       <button class="button" onclick="insert('0')">0</button>
       <button class="button" onclick="insert('.')">.</button>
       <button class="button" onclick="equal('=')">=</button>
       <button class="button" onclick="insert('+')">+</button>
     </div>
     <script type="text/javascript">
-      //Sprawdza, czy zmienna justCalculated jest ustawiona na true, co oznacza,
-      //że właśnie obliczono wynik. Jeśli tak, to funkcja clean() jest wywoływana, aby wyczyścić ekran,
-      //a justCalculated jest ustawiane na false.
-      //Pobiera bieżące wyrażenie z ekranu kalkulatora.
-      //Jeśli dodawany numer to przecinek (czyli .), funkcja sprawdza,
-      //czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym. Jeśli tak,
-      //funkcja zwraca kontrolę i nie dodaje kolejnego przecinka.
-      //Dodaje numer do bieżącego wyrażenia na ekranie kalkulatora.
-      //W ten sposób, funkcja insert() pozwala na wprowadzanie liczb
-      //i operatorów do kalkulatora, jednocześnie zapewniając,
-      //że po obliczeniu wyniku, ekran jest czyszczony przed dodaniem nowego numeru.
-      //To zapobiega dopisywaniu do wyniku po jego obliczeniu.
+      // Checks if the variable justCalculated is set to true, which means
+      // that a result has just been calculated. If so, the clean() function is called to clear the screen,
+      // and justCalculated is set to false.
+      // Retrieves the current expression from the calculator screen.
+      // If the added number is a decimal point (i.e., .), the function checks
+      // whether a decimal point is already present in the current numerical expression. If so,
+      // the function returns control and does not add another decimal point.
+      // Adds the number to the current expression on the calculator screen.
+      // In this way, the insert() function allows numbers
+      // and operators to be entered into the calculator, while also ensuring
+      // that after a result is calculated, the screen is cleared before adding a new number.
+      // This prevents appending to the result after it has been calculated.
       var justCalculated = false;
       function insert(num) {
         if (justCalculated) {
@@ -116,43 +116,44 @@
         }
         var currentExpression = document.getElementById("result").value;
         if (num == ".") {
-          // Sprawdź, czy przecinek jest już obecny w bieżącym wyrażeniu liczbowym
+          // Check if a decimal point is already present in the current numerical expression
           var lastNumber = currentExpression.split(/[\+\-\*\/]/).pop();
           if (lastNumber.includes(".")) {
             return;
-            // Jeśli num to przecinek i już istnieje przecinek, nie dodawaj kolejnego
+            // If num is a decimal point and a decimal point already exists, do not add another
           }
         }
         document.getElementById("result").value = currentExpression + num;
       }
-      //oblicza wynik wyrażenia matematycznego
+      // calculates the result of a mathematical expression
       function equal() {
         var exp = document.getElementById("result").value;
         if (exp) {
           var result = eval(exp);
-          // Sprawdź, czy wynik jest liczbą całkowitą
+          // Check if the result is an integer
           if (Number.isInteger(result)) {
             document.getElementById("result").value = result;
           } else {
-            // Jeśli wynik jest ułamkiem, zaokrąglij do 8 miejsca po przecinku
+            // If the result is a fraction, round to 8 decimal places
             document.getElementById("result").value = result.toFixed(8);
           }
           justCalculated = true;
         }
       }
-      //czyści wyświetlacz
+      // clears the display
       function clean() {
         document.getElementById("result").value = "";
       }
-      //oblicza pierwiastek kwadratowy liczby
+      // calculates the square root of a number
       function squareRoot() {
         var exp = document.getElementById("result").value;
         if (exp) {
-          document.getElementById("result").value = Math.sqrt(eval(exp));
+          var result = Math.sqrt(eval(exp));
+          document.getElementById("result").value = result.toFixed(8);
           justCalculated = true;
         }
       }
-      //podnosi liczbę do kwadratu
+      // raises a number to the power of two
       function square() {
         var exp = document.getElementById("result").value;
         if (exp) {
@@ -160,7 +161,7 @@
           justCalculated = true;
         }
       }
-      //oblicza procent liczby
+      // calculates the percentage of a number
       function percent() {
         var exp = document.getElementById("result").value;
         if (exp) {
