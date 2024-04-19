@@ -96,77 +96,109 @@
       <button class="button" onclick="insert('+')">+</button>
     </div>
     <script type="text/javascript">
-      // Checks if the variable justCalculated is set to true, which means
-      // that a result has just been calculated. If so, the clean() function is called to clear the screen,
-      // and justCalculated is set to false.
-      // Retrieves the current expression from the calculator screen.
-      // If the added number is a decimal point (i.e., .), the function checks
-      // whether a decimal point is already present in the current numerical expression. If so,
-      // the function returns control and does not add another decimal point.
-      // Adds the number to the current expression on the calculator screen.
-      // In this way, the insert() function allows numbers
-      // and operators to be entered into the calculator, while also ensuring
-      // that after a result is calculated, the screen is cleared before adding a new number.
-      // This prevents appending to the result after it has been calculated.
+      // The variable justCalculated is set to false initially. This variable is used to check if a calculation has just been performed.
       var justCalculated = false;
+
+      // The insert function is used to add a number or operator to the calculator's display.
       function insert(num) {
+        // If a calculation has just been performed (justCalculated is true), the display is cleared and justCalculated is set to false.
         if (justCalculated) {
           clean();
           justCalculated = false;
         }
+        // The current expression on the calculator's display is retrieved.
         var currentExpression = document.getElementById("result").value;
+        // If the added number is a decimal point, the function checks if a decimal point is already present in the current numerical expression.
+        // If a decimal point is already present, the function returns control and does not add another decimal point.
         if (num == ".") {
-          // Check if a decimal point is already present in the current numerical expression
           var lastNumber = currentExpression.split(/[\+\-\*\/]/).pop();
           if (lastNumber.includes(".")) {
             return;
-            // If num is a decimal point and a decimal point already exists, do not add another
           }
         }
+        // The number is added to the current expression on the calculator's display.
         document.getElementById("result").value = currentExpression + num;
       }
-      // calculates the result of a mathematical expression
+
+      // The equal function calculates the result of a mathematical expression.
       function equal() {
+        // The current expression on the calculator's display is retrieved.
         var exp = document.getElementById("result").value;
+        // If there is an expression, it is evaluated and the result is stored.
         if (exp) {
           var result = eval(exp);
-          // Check if the result is an integer
-          if (Number.isInteger(result)) {
-            document.getElementById("result").value = result;
-          } else {
-            // If the result is a fraction, round to 8 decimal places
-            document.getElementById("result").value = result.toFixed(8);
-          }
+          // The result is formatted to fit within 12 digits on the display.
+          document.getElementById("result").value = formatResult(result);
+          // The justCalculated variable is set to true since a calculation has just been performed.
           justCalculated = true;
         }
       }
-      // clears the display
+
+      // The clean function clears the calculator's display.
       function clean() {
         document.getElementById("result").value = "";
       }
-      // calculates the square root of a number
+
+      // The squareRoot function calculates the square root of a number.
       function squareRoot() {
+        // The current expression on the calculator's display is retrieved.
         var exp = document.getElementById("result").value;
+        // If there is an expression, its square root is calculated and displayed.
         if (exp) {
           var result = Math.sqrt(eval(exp));
-          document.getElementById("result").value = result.toFixed(8);
-          justCalculated = true;
+          // If the result is not a number (NaN), an alert is shown.
+          if (isNaN(result)) {
+            alert("Cannot calculate square root of a negative number!");
+          } else {
+            // The result is formatted to fit within 12 digits on the display.
+            document.getElementById("result").value = formatResult(result);
+            // The justCalculated variable is set to true since a calculation has just been performed.
+            justCalculated = true;
+          }
         }
       }
-      // raises a number to the power of two
+
+      // The square function raises a number to the power of two.
       function square() {
+        // The current expression on the calculator's display is retrieved.
         var exp = document.getElementById("result").value;
+        // If there is an expression, it is raised to the power of two and the result is displayed.
         if (exp) {
-          document.getElementById("result").value = Math.pow(eval(exp), 2);
+          var result = Math.pow(eval(exp), 2);
+          // The result is formatted to fit within 12 digits on the display.
+          document.getElementById("result").value = formatResult(result);
+          // The justCalculated variable is set to true since a calculation has just been performed.
           justCalculated = true;
         }
       }
-      // calculates the percentage of a number
+
+      // The percent function calculates the percentage of a number.
       function percent() {
+        // The current expression on the calculator's display is retrieved.
         var exp = document.getElementById("result").value;
+        // If there is an expression, its percentage is calculated and displayed.
         if (exp) {
-          document.getElementById("result").value = eval(exp) / 100;
+          var result = eval(exp) / 100;
+          // The result is formatted to fit within 12 digits on the display.
+          document.getElementById("result").value = formatResult(result);
+          // The justCalculated variable is set to true since a calculation has just been performed.
           justCalculated = true;
+        }
+      }
+
+      // The formatResult function formats the result to fit within 12 digits on the display.
+      function formatResult(result) {
+        // If the result is an integer, it is returned as is.
+        // If the result is a fraction, it is rounded to fit within 12 digits.
+        if (Number.isInteger(result)) {
+          return result;
+        } else {
+          var resultString = result.toString();
+          if (resultString.length > 12) {
+            return result.toFixed(12 - Math.floor(result).toString().length);
+          } else {
+            return result;
+          }
         }
       }
     </script>
